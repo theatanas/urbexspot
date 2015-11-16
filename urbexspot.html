@@ -1,14 +1,13 @@
 <head>
-  <title>urbexspot</title>
+    <title>urbexspot</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+    <h1>Urbexspot</h1> 
+	{{ #if currentUser }}
+		{{> dashboard}}
+	{{ else }}
+		{{> registerForm}} 
+		{{> loginForm}}
+	{{/if }}
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
