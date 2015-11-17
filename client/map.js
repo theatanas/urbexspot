@@ -12,12 +12,15 @@ Template.map.onCreated(function() {
             console.log("Marker added. x: " + lat + ", y: " + lon);
         });
 
+
+
+
         var markers = {};
 
+        // Make sure to subscribe before using cursor.find().observe();
         Markers.find().observe({
 
             added: function(document) {
-            	console.log("ADDED DOCUMENT");
                 // Create a marker for this document
                 var marker = new google.maps.Marker({
                     draggable: true,
@@ -29,14 +32,28 @@ Template.map.onCreated(function() {
                     id: document._id
                 });
 
-                // This listener lets us drag markers on the map and update their corresponding document.
-                google.maps.event.addListener(marker, 'dragend', function(event) {
-                    Markers.update(marker.id, {
-                        $set: {
-                            lat: event.latLng.lat(),
-                            lng: event.latLng.lng()
+                // Right Click - remove marker
+                google.maps.event.addListener(marker, "rightclick", function(event) {
+                    
+                    // Convert the markers to an array
+                    var markersArray = Object.keys(markers).map(function (key) {return markers[key]});
+                    markersArray.map(function(mark) {
+                        var markerId = mark.id;
+                        var markerLat = mark.position.lat();
+                        var markerLng = mark.position.lng();
+                        var eventLat = event.latLng.lat();
+                        var eventLng = event.latLng.lng();
+
+                        if (markerLat == eventLat && markerLng == eventLng) {
+                            Meteor.call("removeMarker", markerId);
+                            marker.setMap(null);
                         }
                     });
+                 });
+
+                // Drag - this lets us drag markers around the map and update their corresponding document.
+                google.maps.event.addListener(marker, 'dragend', function(event) {
+                    Meteor.call("dragMarker", marker.id, event.latLng.lat(), event.latLng.lng());
                 });
 
                 // Store this marker instance within the markers object.
@@ -66,11 +83,18 @@ Template.map.onCreated(function() {
 });
 
 Template.map.helpers({
+    geolocationError: function() {
+        var error = Geolocation.error();
+        return error && error.message;
+    },
+
     mapOptions: function() {
-        if (GoogleMaps.loaded()) {
+        var latLng = Geolocation.latLng();
+        // Notice the "&& latLng" part below.
+        if (GoogleMaps.loaded() && latLng) {
             return {
-                center: new google.maps.LatLng(-37.8136, 144.9631),
-                zoom: 8
+                center: new google.maps.LatLng(latLng.lat, latLng.lng),
+                zoom: MAP_ZOOM
             };
         }
     }
