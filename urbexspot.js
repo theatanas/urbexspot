@@ -11,7 +11,7 @@ if (Meteor.isClient) {
                 password: passwordVal
             })
         }
-    })
+    });
 
     Template.loginForm.events({
         'submit form' : function(event, template) {
@@ -20,14 +20,14 @@ if (Meteor.isClient) {
                 passwordVal = template.find("#login-password").value;
                 Meteor.loginWithPassword(emailVal, passwordVal);
         }
-    })
+    });
 
     Template.dashboard.events({
         'click #logout': function(event) {
             event.preventDefault();
             Meteor.logout();
         }
-    })
+    });
 
     // Session.setDefault('counter', 0);
     // Template.hello.helpers({
@@ -45,6 +45,6 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function() {
-        // code to run on server at startup
+        console.log("Server Started");
     });
 }
