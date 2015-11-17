@@ -13,11 +13,15 @@ if (Meteor.isClient) {
         }
     });
 
+    // Implement this:
+    // http://blog.benmcmahen.com/post/41741539120/building-a-customized-accounts-ui-for-meteor
+
     Template.loginForm.events({
         'submit form' : function(event, template) {
             event.preventDefault();
             var emailVal = template.find("#login-email").value,
                 passwordVal = template.find("#login-password").value;
+                
                 Meteor.loginWithPassword(emailVal, passwordVal);
         }
     });
@@ -28,19 +32,6 @@ if (Meteor.isClient) {
             Meteor.logout();
         }
     });
-
-    // Session.setDefault('counter', 0);
-    // Template.hello.helpers({
-    //     counter: function() {
-    //         return Session.get('counter');
-    //     }
-    // });
-
-    // Template.hello.events({
-    //     'click button': function() {
-    //         Session.set('counter', Session.get('counter') + 1);
-    //     }
-    // });
 }
 
 if (Meteor.isServer) {
