@@ -17,6 +17,7 @@ Template.map.onCreated(function() {
         Markers.find().observe({
 
             added: function(document) {
+            	console.log("ADDED DOCUMENT");
                 // Create a marker for this document
                 var marker = new google.maps.Marker({
                     draggable: true,
