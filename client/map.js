@@ -1,25 +1,15 @@
-Markers = new Mongo.Collection('markers');
 Meteor.startup(function() {
     GoogleMaps.load();
-});
-
-Template.map.helpers({
-    mapOptions: function() {
-        if (GoogleMaps.loaded()) {
-            return {
-                center: new google.maps.LatLng(-37.8136, 144.9631),
-                zoom: 8
-            };
-        }
-    }
 });
 
 Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
 
         google.maps.event.addListener(map.instance, 'click', function(event) {
-        	console.log(event);
-            Meteor.call("addMarker", event);
+        	var lat = event.latLng.lat();
+        	var lon = event.latLng.lng();
+            Meteor.call("addMarker", lat, lon);
+            console.log("Marker added. x: " + lat + ", y: " + lon);
         });
 
         var markers = {};
@@ -72,4 +62,15 @@ Template.map.onCreated(function() {
             }
         });
     });
+});
+
+Template.map.helpers({
+    mapOptions: function() {
+        if (GoogleMaps.loaded()) {
+            return {
+                center: new google.maps.LatLng(-37.8136, 144.9631),
+                zoom: 8
+            };
+        }
+    }
 });

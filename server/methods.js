@@ -1,8 +1,8 @@
 Meteor.methods({
-	addMarker: function(e) {
-		Markers.insert({
-		    lat: e.latLng.lat(),
-		    lng: e.latLng.lng()
-		});
-	}
+    addMarker: function(latitude, longitude) {
+        Markers.insert({
+            lat: latitude,
+            lng: longitude
+        });
+    }
 });
