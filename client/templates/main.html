@@ -1,0 +1,27 @@
+<template name="root">
+	<head>
+	    <title>.urbxspt</title>
+	</head>
+	<body>
+		{{ #if currentUser }}
+			<div class="container-fluid">
+				<div class="row">
+	    			<div class="col-md-12">
+		    			<h1 class="mb-20">Urbexspot</h1> 
+	    			</div>
+					{{> dashboard}}
+				</div>
+			</div>
+		{{ else }}
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-push-2">
+						<h1 class="mb-20">Urbexspot</h1> 
+						{{> registerForm}} 
+						{{> loginForm}}
+					</div>
+				</div>
+			</div>
+		{{/if }}
+	</body>
+</template>
