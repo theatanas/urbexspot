@@ -1,0 +1,9 @@
+<template name="mainLayout">
+    <header>
+        <h1>FlowRouter Blog</h1></header>
+    <main>
+    <!-- In this layout, we can render any template into the main area. The content variable carries the name of the template we are rendering with Template.dynamic. We pass it via BlazeLayout.render(). -->
+        {{>Template.dynamic template=content}}
+    </main>
+    <footer>We love Meteor</footer>
+</template>

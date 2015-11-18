@@ -1,25 +1,32 @@
 if (Meteor.isClient) {
 
+    // TODO: Reset Forgotten Password
+    // http://steve-adams.me/practical-examples-of-authentication-in-meteor-1-0/
+
     Template.registerForm.events({
         'submit form' : function(event, template) {
             event.preventDefault();
             var emailVal = template.find("#register-email").value,
                 passwordVal = template.find("#register-password").value;
-            
+
             Accounts.createUser({
                 email: emailVal,
                 password: passwordVal
             }, function(err) {
-                console.log(err.reason);
                 $(".register-form").addClass("has-warning");
                 $(".register-form .btn-default").addClass("btn-danger");
                 $(".register-form .bg-danger").html(err.reason);
-            })
+            });
         }
     });
 
-    // Implement this:
-    // http://blog.benmcmahen.com/post/41741539120/building-a-customized-accounts-ui-for-meteor
+    // The following callback is executed when the template 'registerForm' is rendered. More info: http://jqueryvalidation.org/validate
+    Template.registerForm.rendered = function() {
+        $(".register-form").validate({
+            errorContainer: ".register-form .bg-danger",
+            errorLabelContainer: ".register-form .bg-danger"
+        });
+    }
 
     Template.loginForm.events({
         'submit form' : function(event, template) {
