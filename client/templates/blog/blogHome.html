@@ -1,6 +1,17 @@
 <template name="blogHome">
     <p>This is the home page of our blog</p>
-    <p>
-        <a href="/blog/hello-world">See Hello World Post</a>
-    </p>
+    <ul>
+    	<li>Posts are below</li>
+		{{#each posts}}
+			<li>
+				<a href={{pathForPost}}>{{title}}</a>
+			</li>
+		{{/each}}
+
+		{{#each markers}}
+			<li>
+				<span>{{lat}}</span>
+			</li>
+		{{/each}}
+	</ul>
 </template>

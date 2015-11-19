@@ -12,9 +12,6 @@ Template.map.onCreated(function() {
             console.log("Marker added. x: " + lat + ", y: " + lon);
         });
 
-
-
-
         var markers = {};
 
         // Make sure to subscribe before using cursor.find().observe();
