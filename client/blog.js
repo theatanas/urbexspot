@@ -6,6 +6,8 @@ Template.blogPost.onCreated(function() {
     });
 });
 
+
+// Template helpers provide data for templates
 Template.blogPost.helpers({
     post: function() {
         var postId = FlowRouter.getParam('postId');
@@ -18,12 +20,11 @@ Template.blogHome.helpers({
     posts: function() {
         return Posts.find();
     },
-    testFx: function() {
-        return "TESTFX";
-    }
-});
 
-Template.blogHome.helpers({
+    markers: function() {
+        return Markers.find();
+    },
+
     pathForPost: function() {
         var post = this;
         var params = {

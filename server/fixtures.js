@@ -15,17 +15,17 @@ function randomDate(start, end) {
 // });
 
 
-Posts.remove({});
-Posts.insert({
-    _id: "hello-world",
-    category: "meteor",
-    title: "Hello World",
-    content: "This is the hello world post"
-});
+// Posts.remove({});
+// Posts.insert({
+//     _id: "hello-world",
+//     category: "meteor",
+//     title: "Hello World",
+//     content: "This is the hello world post"
+// });
 
-Posts.insert({
-    _id: "hello-urbex",
-    category: "urbex",
-    title: "Yo Urbex",
-    content: "Urbxr info"
-});
+// Posts.insert({
+//     _id: "hello-urbex",
+//     category: "urbex",
+//     title: "Yo Urbex",
+//     content: "Urbxr info"
+// });
