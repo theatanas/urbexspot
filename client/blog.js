@@ -13,11 +13,18 @@ Template.blogPost.helpers({
         var postId = FlowRouter.getParam('postId');
         var post = Posts.findOne({ _id: postId }) || {};
         return post;
+    },
+
+    sidebar: function() {
+        var category = FlowRouter.getParam("category");
+        var cursor = Posts.find({ category: category });
+        return cursor;
     }
 });
 
 Template.blogHome.helpers({
     posts: function() {
+        console.log(FlowRouter.current());
         return Posts.find();
     },
 
@@ -40,3 +47,13 @@ Template.blogHome.helpers({
         return path;
     }
 });
+
+// Template.onlyIfLoggedIn.helpers({
+//     authInProcess: function() {
+//         return Meteor.logginIn();
+//     },
+
+//     canShow: function() {
+//         return ! !Meteor.user();
+//     }
+// })
