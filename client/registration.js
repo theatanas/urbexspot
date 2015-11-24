@@ -1,7 +1,7 @@
 // TODO: Reset Forgotten Password
 // http://steve-adams.me/practical-examples-of-authentication-in-meteor-1-0/
 
-Template.registerForm.events({
+Template.registrationForm.events({
     'submit form': function(event, template) {
         event.preventDefault();
         var emailVal = template.find("#register-email").value,
@@ -18,8 +18,8 @@ Template.registerForm.events({
     }
 });
 
-// The following callback is executed when the template 'registerForm' is rendered. More info: http://jqueryvalidation.org/validate
-Template.registerForm.rendered = function() {
+// The following callback is executed when the template 'registrationForm' is rendered. More info: http://jqueryvalidation.org/validate
+Template.registrationForm.rendered = function() {
     $(".register-form").validate({
         errorContainer: ".register-form .bg-danger",
         errorLabelContainer: ".register-form .bg-danger"

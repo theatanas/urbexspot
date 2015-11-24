@@ -1,25 +1,9 @@
 <template name="baseLayout">
-<!-- TODO: Change the template to FlowRouter's dynamic version -->
 	<header></header>
-	{{ #if currentUser }}
-		<div class="container-fluid">
-			<div class="row">
-    			<div class="col-md-12">
-	    			<h1 class="mb-20">Urbexspot</h1> 
-    			</div>
-				{{> dashboard}}
-			</div>
-		</div>
-	{{ else }}
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-push-2">
-					<h1 class="mb-20">Urbexspot</h1> 
-					{{> registerForm}} 
-					{{> loginForm}}
-				</div>
-			</div>
-		</div>
-	{{/if }}
-	<footer>2015</footer>
+		<main>
+			{{>Template.dynamic template=content}}
+		</main>
+	<footer>
+		&copy; 2015;
+	</footer>
 </template>
